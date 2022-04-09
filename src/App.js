@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
     <div className="App font-poppins">
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* <Route path="/home" element={<Home />} /> */}
+        <Route path="/room/:room" element={<Home />} />
       </Routes>
     </div>
   );
