@@ -40,7 +40,7 @@ export function Chat() {
                     key={`${message.unixDate}`}
                   >
                     <img
-                      className="rounded-xl w-12 h-12"
+                      className="rounded-full w-12 h-12"
                       src={messageUser.photoURL}
                       alt="user-profile"
                     />
