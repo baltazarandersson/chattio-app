@@ -1,14 +1,21 @@
 import { useState } from "react";
 import ReactDOM from "react-dom";
-import { MdDone } from "react-icons/md";
+import { BsArrowReturnLeft } from "react-icons/bs";
 import { useUserContext } from "../../context/UserContext";
 
 function Modal({ toggleModal }) {
-  const { createRoom } = useUserContext();
+  const { createRoom, rooms } = useUserContext();
   const [keyword, setKeyword] = useState("");
+  const [Error, setError] = useState(false);
 
   function handleSumbit(e) {
     e.preventDefault();
+    if (rooms.find((room) => room === keyword)) {
+      setError("That room title is currently in use");
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
+    }
     createRoom(keyword, toggleModal);
   }
 
@@ -25,7 +32,7 @@ function Modal({ toggleModal }) {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="flex flex-col items-center justify-around h-1/2 w-full sm:w-1/3 bg-zinc-900 border-2 border-zinc-800 rounded-xl p-8"
+        className="relative flex flex-col items-center justify-around h-1/2 w-full sm:w-1/3 border-2 bg-zinc-900 border-zinc-800 rounded-xl p-8"
       >
         <p className="text-4xl font-bold">Create a room</p>
         <section className="h-full flex flex-col gap-4 justify-center">
@@ -35,18 +42,25 @@ function Modal({ toggleModal }) {
             className="w-full h-12 bg-zinc-00 flex rounded-xl overflow-hidden"
           >
             <input
-              className="w-full bg-zinc-700 px-8 outline-none"
+              className={`w-full transition-colors px-8 outline-none ${
+                Error ? "bg-red-900" : "bg-zinc-700"
+              }`}
               onChange={handleChange}
             />
             <button
               onClick={handleSumbit}
               type="button"
-              className="w-4/12 flex justify-center items-center bg-green-600"
+              className={`w-4/12 flex justify-center items-center ${
+                Error ? "bg-red-600" : "bg-green-600"
+              }`}
             >
-              <MdDone size="32" className="drop-shadow-lg" />
+              <BsArrowReturnLeft size="32" className="drop-shadow-lg" />
             </button>
           </form>
         </section>
+        <p className="absolute bottom-8 font-semibold text-red-600">
+          {Error ? Error : ""}
+        </p>
       </div>
     </div>
   );

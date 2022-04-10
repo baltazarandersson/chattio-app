@@ -31,7 +31,7 @@ export function ChatInput() {
       <button
         onClick={handleSumbit}
         type="button"
-        className="w-2/12 flex justify-center items-center bg-yellow-500 rounded-xl transition-transform hover:scale-110"
+        className="w-2/12 flex justify-center items-center bg-green-600 rounded-xl transition-transform hover:scale-110"
       >
         <IoSend size={28} className="drop-shadow-lg" />
       </button>
