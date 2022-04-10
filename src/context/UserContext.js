@@ -21,10 +21,12 @@ export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [currentRoom, setCurrentRoom] = useState({});
   const [rooms, setRooms] = useState(null);
-  const [roomMessages, setRoomMessages] = useState({});
+  const [currentRoomData, setCurrentRoomData] = useState({});
   const [currentParticipants, setCurrentParticipants] = useState([]);
   let navigate = useNavigate();
+
   async function changeRoom(room) {
+    setCurrentRoomData({});
     const roomRef = doc(db, "rooms", room);
     const roomSnap = await getDoc(roomRef);
     if (roomSnap.exists()) {
@@ -61,14 +63,19 @@ export function UserContextProvider({ children }) {
       const roomRef = doc(db, "rooms", currentRoom.title);
       const unsub = onSnapshot(roomRef, async (doc) => {
         const snapData = doc.data();
-        setRoomMessages(snapData.messages);
-        const listOfUsers = await getDocs(collection(db, "users"));
-        listOfUsers.forEach((doc) => {
-          setCurrentParticipants((prevState) => [...prevState, doc.data()]);
-        });
+        setCurrentRoomData(snapData);
+        getParticipants();
       });
+      return unsub;
     }
   }, [currentRoom]);
+
+  async function getParticipants() {
+    const listOfUsers = await getDocs(collection(db, "users"));
+    listOfUsers.forEach((doc) => {
+      setCurrentParticipants((prevState) => [...prevState, doc.data()]);
+    });
+  }
 
   async function getRooms() {
     const docRef = doc(db, "rooms", "publicRooms");
@@ -133,7 +140,7 @@ export function UserContextProvider({ children }) {
         currentRoom,
         changeRoom,
         sendMessage,
-        roomMessages,
+        currentRoomData,
         currentParticipants,
         navigateRoom,
         handleLogOut,

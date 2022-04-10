@@ -21,7 +21,7 @@ export function Home() {
   }, [room, user]);
 
   return (
-    <div className="flex w-screen h-screen bg-zinc-800  justify-center items-center md:p-8">
+    <div className="flex w-full h-full bg-zinc-800  justify-center items-center md:p-8">
       <div className=" w-full h-full bg-zinc-900 md:rounded-xl flex md:border-2 border-zinc-700">
         <div className="h-full w-1/3 hidden sm:flex">
           <Rooms />
