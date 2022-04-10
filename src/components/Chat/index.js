@@ -46,7 +46,7 @@ export function Chat() {
                     />
                     <div className="flex h-full flex-col justify-between">
                       <div className="flex gap-4 items-center">
-                        <p className="text-zinc-300">
+                        <p className="text-zinc-400">
                           {messageUser.displayName}
                         </p>
                         <div className="w-2 h-2 bg-zinc-500 rounded-full" />

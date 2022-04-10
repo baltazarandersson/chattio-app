@@ -5,7 +5,7 @@ import { useLoader } from "../../hooks/useLoader";
 
 export function UserContainer() {
   const [isOpened, setIsOpened] = useState(false);
-  const { user } = useUserContext();
+  const { user, handleLogOut } = useUserContext();
   const isLoading = useLoader();
 
   function handleClick() {
@@ -26,9 +26,9 @@ export function UserContainer() {
   return (
     <div
       style={{ minHeight: "5rem" }}
-      className="w-full flex  px-8 py-4 border-t-2 border-zinc-700 transition-all duration-300 h-20"
+      className="w-full flex px-8 py-4 border-t-2 border-zinc-700 transition-all duration-300 h-20"
     >
-      <div className="h-12 w-full flex justify-between lg:justify-start gap-4 items-center">
+      <div className="h-12 w-full flex justify-between gap-4 items-center">
         <img
           alt="profile-pic"
           src={user.photoURL}
@@ -36,18 +36,26 @@ export function UserContainer() {
         />
         <div className="hidden h-full lg:flex flex-col justify-center text-sm">
           <p>{user.displayName}</p>
-          <p className="text-zinc-500 hidden xl:block">{user.email}</p>
+          <p className="text-zinc-500 hidden xl:block">
+            {user.email.split("@")[0]}
+          </p>
         </div>
-        <div className="relative">
+        <div className="relative right-0 bg-zinc-900">
           <button
-            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-800 border-2 border-zinc-700 -translate-x-2/4 rounded-xl ${
-              isOpened ? "visible" : "invisible"
+            onClick={handleLogOut}
+            className={`absolute bottom-12 transition-opacity left-1/2 p-2 px-4 bg-zinc-800 -translate-x-2/4 rounded-xl transition-transform hover:rotate-6 ${
+              isOpened ? "opacity-100" : "opacity-0"
             }`}
           >
             LogOut
           </button>
           <button onClick={handleClick}>
-            <IoIosArrowUp size={32} />
+            <IoIosArrowDown
+              size={32}
+              className={`transition-transform duration-300 text-zinc-300 ${
+                isOpened ? "rotate-180" : "rotate-0"
+              }`}
+            />
           </button>
         </div>
       </div>

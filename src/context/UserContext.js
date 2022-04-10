@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import {
   doc,
   getDoc,
@@ -111,6 +111,17 @@ export function UserContextProvider({ children }) {
     }
   }
 
+  function handleLogOut() {
+    signOut(auth)
+      .then(() => {
+        localStorage.clear();
+        navigate("/");
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -124,6 +135,7 @@ export function UserContextProvider({ children }) {
         roomMessages,
         currentParticipants,
         navigateRoom,
+        handleLogOut,
       }}
     >
       {children}

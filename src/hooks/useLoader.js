@@ -6,11 +6,7 @@ export function useLoader() {
   const { user, roomMessages, currentParticipants } = useUserContext();
 
   useEffect(() => {
-    if (
-      user &&
-      currentParticipants.length > 0 &&
-      Object.keys(roomMessages).length !== 0
-    ) {
+    if (user && currentParticipants.length > 0) {
       setIsLoading(false);
     }
   }, [currentParticipants, roomMessages, user]);

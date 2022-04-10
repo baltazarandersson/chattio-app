@@ -18,14 +18,14 @@ export const useAuthContext = () => useContext(AuthContext);
 export function AuthContextProvider({ children }) {
   const navigate = useNavigate();
 
-  function setUserInitialData(response) {
-    setDoc(doc(db, "/users/" + response.user.uid), {
+  async function setUserInitialData(response) {
+    await setDoc(doc(db, "/users/" + response.user.uid), {
       email: response.user.email,
       photoURL: response.user.photoURL,
       displayName: response.user.displayName,
       uid: response.user.uid,
     });
-    updateDoc(doc(db, "rooms", "home"), {
+    await updateDoc(doc(db, "rooms", "home"), {
       participants: arrayUnion(response.user.uid),
     });
   }
@@ -37,7 +37,7 @@ export function AuthContextProvider({ children }) {
         setUserInitialData(response);
       }
       localStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
-      navigate("/home");
+      navigate("/room/home");
     });
   }
   async function loginWithTwitter() {
@@ -47,7 +47,7 @@ export function AuthContextProvider({ children }) {
         setUserInitialData(response);
       }
       localStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
-      navigate("/home");
+      navigate("/room/home");
     });
   }
 
@@ -58,7 +58,7 @@ export function AuthContextProvider({ children }) {
         setUserInitialData(response);
       }
       localStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
-      navigate("/home");
+      navigate("/room/home");
     });
   }
 
@@ -68,9 +68,8 @@ export function AuthContextProvider({ children }) {
       if (getAdditionalUserInfo(response).isNewUser) {
         setUserInitialData(response);
       }
-
       localStorage.setItem("Auth Token", response._tokenResponse.refreshToken);
-      navigate("/home");
+      navigate("/room/home");
     });
   }
 

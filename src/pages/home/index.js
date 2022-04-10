@@ -8,16 +8,15 @@ import { useRedirect } from "../../hooks/useRedirect";
 export function Home() {
   let { room } = useParams();
   useRedirect();
-  const { changeRoom, currentRoom } = useUserContext();
+  const { changeRoom, currentRoom, user } = useUserContext();
+
+  console.log(user);
 
   useEffect(() => {
-    if (currentRoom) {
-      if (room === currentRoom.title) {
-        return;
-      } else {
-        changeRoom(room);
-      }
+    if (room === currentRoom.title) {
+      return;
     } else {
+      console.log(currentRoom);
       changeRoom(room);
     }
   }, [room]);
