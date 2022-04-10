@@ -1,14 +1,18 @@
 import { useUserContext } from "../../context/UserContext";
 import { Chat } from "../Chat";
 import { ChatInput } from "../ChatInput";
+import { Drawer } from "../Drawer";
 
 export function ChatContainer() {
   const { currentRoom } = useUserContext();
 
   return (
     <div className="w-full flex flex-col justify-between">
-      <header className="w-full h-16 flex items-center justify-between px-8 border-b-2 border-zinc-700">
-        <p>Chat</p>
+      <header className="w-full h-16 flex items-center justify-between px-4 md:px-8 border-b-2 border-zinc-700">
+        <div className="flex h-full items-center gap-4">
+          <Drawer />
+          <p>Chat</p>
+        </div>
         {"participants" in currentRoom ? (
           <p>{currentRoom.participants.length} participants</p>
         ) : null}

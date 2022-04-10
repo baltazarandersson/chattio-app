@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdClose } from "react-icons/md";
 import { useUserContext } from "../../context/UserContext";
 import { useLoader } from "../../hooks/useLoader";
 import { Loader } from "../Loader";
 import { ModalPortal } from "../RoomModal";
 import { UserContainer } from "../UserContainer";
 
-export function Rooms() {
+export function Rooms({ props } = {}) {
   const [showModal, setShowModal] = useState(false);
   const isLoading = useLoader();
+  const { toggleDrawer } = props ? props : {};
 
   const { rooms, currentRoom, navigateRoom } = useUserContext();
 
@@ -20,18 +21,28 @@ export function Rooms() {
   }
 
   return (
-    <div className="hidden h-full w-1/3 border-r-2 border-zinc-700 flex-col justify-between sm:flex">
+    <div className="h-full w-full border-r-2 border-zinc-700 flex-col justify-between flex">
       <header
         style={{ minHeight: "4rem" }}
         className="w-full h-16 flex justify-between items-center px-8 border-b-2 border-zinc-700"
       >
         <p>Rooms</p>
-        <button
-          onClick={handleClick}
-          className="p-1 bg-zinc-700 box-content rounded-full transition-transform hover:scale-125"
-        >
-          <MdAdd size={24} />
-        </button>
+        <section className="flex gap-4">
+          <button
+            onClick={handleClick}
+            className="p-1 bg-zinc-700 box-content rounded-full transition-transform hover:scale-125"
+          >
+            <MdAdd size={24} />
+          </button>
+          {toggleDrawer && (
+            <button
+              onClick={toggleDrawer}
+              className="transition-transform hover:scale-125"
+            >
+              <MdClose size={24} />
+            </button>
+          )}
+        </section>
       </header>
       <section className="w-full h-3/4 flex flex-col gap-2 p-4 overflow-auto">
         {isLoading ? (
@@ -55,7 +66,10 @@ export function Rooms() {
               return (
                 <button
                   key={room}
-                  onClick={() => navigateRoom(room)}
+                  onClick={() => {
+                    navigateRoom(room);
+                    toggleDrawer && toggleDrawer();
+                  }}
                   className="w-full py-4 px-8 border-2 border-zinc-800 rounded-xl transition-colors hover:bg-zinc-800"
                 >
                   {room}
@@ -65,7 +79,7 @@ export function Rooms() {
           })
         )}
       </section>
-      <UserContainer />
+      <UserContainer props={toggleDrawer} />
       {showModal && <ModalPortal toggleModal={toggleModal} />}
     </div>
   );

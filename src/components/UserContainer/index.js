@@ -3,10 +3,11 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 import { useLoader } from "../../hooks/useLoader";
 
-export function UserContainer() {
+export function UserContainer({ props }) {
   const [isOpened, setIsOpened] = useState(false);
   const { user, handleLogOut } = useUserContext();
   const isLoading = useLoader();
+  const { toggleDrawer } = props ? props : {};
 
   function handleClick() {
     setIsOpened((prevState) => !prevState);
@@ -34,9 +35,9 @@ export function UserContainer() {
           src={user.photoURL}
           className="h-12 w-12 rounded-full"
         />
-        <div className="hidden h-full lg:flex flex-col justify-center text-sm">
+        <div className="flex sm:hidden h-full lg:flex flex-col justify-center text-sm">
           <p>{user.displayName}</p>
-          <p className="text-zinc-500 hidden xl:block">
+          <p className="text-zinc-500 sm:hidden xl:block">
             {user.email.split("@")[0]}
           </p>
         </div>
@@ -49,7 +50,12 @@ export function UserContainer() {
           >
             LogOut
           </button>
-          <button onClick={handleClick}>
+          <button
+            onClick={() => {
+              handleClick();
+              toggleDrawer && toggleDrawer();
+            }}
+          >
             <IoIosArrowDown
               size={32}
               className={`transition-transform duration-300 text-zinc-300 ${
