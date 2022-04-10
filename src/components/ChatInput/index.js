@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IoIosSend } from "react-icons/io";
+import { IoSend } from "react-icons/io5";
 import { useUserContext } from "../../context/UserContext";
 
 export function ChatInput() {
@@ -21,19 +21,19 @@ export function ChatInput() {
   return (
     <form
       onSubmit={handleSumbit}
-      className="w-full h-full bg-zinc-00 flex rounded-xl overflow-hidden"
+      className="w-full h-full flex justify-between bg-zinc-00 rounded-xl"
     >
       <input
         ref={inputRef}
         onChange={handleChange}
-        className="w-full bg-zinc-700 px-8 outline-none"
+        className="w-3/4 bg-zinc-700 px-8 outline-none transition-colors hover:bg-zinc-600 rounded-xl"
       />
       <button
         onClick={handleSumbit}
         type="button"
-        className="w-2/12 flex justify-center items-center bg-yellow-500"
+        className="w-2/12 flex justify-center items-center bg-yellow-500 rounded-xl transition-transform hover:scale-110"
       >
-        <IoIosSend size="32" className="drop-shadow-lg" />
+        <IoSend size={28} className="drop-shadow-lg" />
       </button>
     </form>
   );

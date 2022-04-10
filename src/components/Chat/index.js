@@ -49,7 +49,7 @@ export function Chat() {
                         <p className="text-zinc-400">
                           {messageUser.displayName}
                         </p>
-                        <div className="w-2 h-2 bg-zinc-500 rounded-full" />
+                        <div className="hidden md:visible w-2 h-2 bg-zinc-500 rounded-full scale-90" />
                         <p className="text-zinc-500 text-sm">
                           {message.sentDate}
                         </p>

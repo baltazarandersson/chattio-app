@@ -10,7 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../firebase/firebase";
 
 const UserContext = React.createContext();
@@ -24,14 +24,16 @@ export function UserContextProvider({ children }) {
   const [roomMessages, setRoomMessages] = useState({});
   const [currentParticipants, setCurrentParticipants] = useState([]);
   let navigate = useNavigate();
-
   async function changeRoom(room) {
-    const docRef = doc(db, "rooms", room);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setCurrentRoom(docSnap.data());
+    const roomRef = doc(db, "rooms", room);
+    const roomSnap = await getDoc(roomRef);
+    if (roomSnap.exists()) {
       updateDoc(doc(db, "rooms", room), {
         participants: arrayUnion(user.uid),
+      }).then(async () => {
+        const updatedRoomDoc = doc(db, "rooms", room);
+        const updatedRoomSnap = await getDoc(updatedRoomDoc);
+        setCurrentRoom(updatedRoomSnap.data());
       });
     } else {
       navigate("/room/home");

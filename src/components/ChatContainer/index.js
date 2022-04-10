@@ -13,10 +13,10 @@ export function ChatContainer() {
           <p>{currentRoom.participants.length} participants</p>
         ) : null}
       </header>
-      <section className="flex w-full h-3/4 px-8 pb-4">
+      <section className="flex w-full h-3/4 grow px-4 md:px-8 pb-4">
         <Chat />
       </section>
-      <section className="w-full h-20 p-4 px-8 border-t-2 border-zinc-700">
+      <section className="w-full h-20 p-4 md:px-8 border-t-2 border-zinc-700">
         <ChatInput />
       </section>
     </div>

@@ -43,7 +43,7 @@ export function UserContainer() {
         <div className="relative right-0 bg-zinc-900">
           <button
             onClick={handleLogOut}
-            className={`absolute bottom-12 transition-opacity left-1/2 p-2 px-4 bg-zinc-800 -translate-x-2/4 rounded-xl transition-transform hover:rotate-6 ${
+            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-800 -translate-x-2/4 rounded-xl transition-all hover:bg-zinc-700 ${
               isOpened ? "opacity-100" : "opacity-0"
             }`}
           >
