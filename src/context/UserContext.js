@@ -26,10 +26,10 @@ export function UserContextProvider({ children }) {
   let navigate = useNavigate();
 
   async function changeRoom(room) {
-    setCurrentRoomData({});
     const roomRef = doc(db, "rooms", room);
     const roomSnap = await getDoc(roomRef);
     if (roomSnap.exists()) {
+      setCurrentRoomData({});
       updateDoc(doc(db, "rooms", room), {
         participants: arrayUnion(user.uid),
       }).then(async () => {

@@ -5,6 +5,7 @@ import { Loader } from "../Loader";
 export function Chat() {
   const { currentRoomData, currentParticipants } = useUserContext();
   const isLoading = useLoader();
+  const roomMessages = currentRoomData.messages || [];
 
   if (isLoading) {
     return (
@@ -18,8 +19,8 @@ export function Chat() {
     <>
       {
         <div className="w-full h-full flex flex-col-reverse gap-6 pt-6 overflow-auto">
-          {currentRoomData.messages.length > 0 &&
-            currentRoomData.messages
+          {roomMessages.length > 0 &&
+            roomMessages
               .slice(0)
               .reverse()
               .map((message) => {
