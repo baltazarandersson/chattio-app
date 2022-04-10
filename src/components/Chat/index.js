@@ -51,7 +51,13 @@ export function Chat() {
                         </p>
                         <div className="hidden md:visible w-2 h-2 bg-zinc-500 rounded-full scale-90" />
                         <p className="text-zinc-500 text-sm">
-                          {message.sentDate}
+                          {new Date(message.unixDate).toLocaleString("en-US", {
+                            day: "numeric",
+                            month: "numeric",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
                         </p>
                       </div>
                       <p>{message.content}</p>
