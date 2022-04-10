@@ -106,7 +106,6 @@ export function UserContextProvider({ children }) {
         messages: arrayUnion({
           sentBy: user.uid,
           unixDate: new Date().getTime(),
-          sentDate: new Date().toDateString(),
           content: message,
         }),
       });
