@@ -3,7 +3,7 @@ export function Loader() {
     <div>
       <svg
         role="status"
-        className="mr-2 w-16 h-16 text-zinc-600 animate-spin dark:text-zinc-600 fill-zinc-400"
+        className="mr-2 w-16 h-16 text-zinc-300 dark:text-zinc-700 animate-spin fill-sky-500"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

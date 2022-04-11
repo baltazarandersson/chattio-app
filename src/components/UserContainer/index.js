@@ -17,9 +17,7 @@ export function UserContainer({ props }) {
     return (
       <div
         style={{ minHeight: "5rem" }}
-        className={`w-full flex  px-8 py-4 border-t-2 border-zinc-700 overflow-hidden ${
-          isOpened ? "h-48" : "h-20"
-        }`}
+        className={`w-full flex  px-8 py-4 border-t-2 border-zinc-200 dark:border-zinc-700 overflow-hidden`}
       ></div>
     );
   }
@@ -27,7 +25,7 @@ export function UserContainer({ props }) {
   return (
     <div
       style={{ minHeight: "5rem" }}
-      className="w-full flex px-8 py-4 border-t-2 border-zinc-700 transition-all duration-300 h-20"
+      className="w-full flex px-8 py-4 border-t-2 border-zinc-200 dark:border-zinc-700 transition-all duration-300 h-20"
     >
       <div className="h-12 w-full flex justify-between gap-4 items-center">
         <img
@@ -37,14 +35,14 @@ export function UserContainer({ props }) {
         />
         <div className="flex sm:hidden h-full lg:flex flex-col justify-center text-sm">
           <p>{user.displayName}</p>
-          <p className="text-zinc-500 sm:hidden xl:block">
+          <p className="text-zinc-500 dark:text-zinc-500 sm:hidden xl:block">
             {user.email.split("@")[0]}
           </p>
         </div>
-        <div className="relative right-0 bg-zinc-900">
+        <div className="relative right-0 bg-zinc-50 dark:bg-zinc-900">
           <button
             onClick={handleLogOut}
-            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-800 -translate-x-2/4 rounded-xl transition-all hover:bg-zinc-700 ${
+            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-200 dark:bg-zinc-800 -translate-x-2/4 rounded-xl transition-all hover:bg-zinc-300 dark:hover:bg-zinc-700 ${
               isOpened ? "opacity-100" : "invisible opacity-0"
             }`}
           >
@@ -58,7 +56,7 @@ export function UserContainer({ props }) {
           >
             <IoIosArrowDown
               size={32}
-              className={`transition-transform duration-300 text-zinc-300 ${
+              className={`transition-transform duration-300 text-zinc-700 dark:text-zinc-300 ${
                 isOpened ? "rotate-180" : "rotate-0"
               }`}
             />

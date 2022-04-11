@@ -21,16 +21,16 @@ export function Rooms({ props } = {}) {
   }
 
   return (
-    <div className="h-full w-full border-r-2 border-zinc-700 flex-col justify-between flex">
+    <div className="h-full w-full border-r-2 border-zinc-200 dark:border-zinc-700 flex-col justify-between flex">
       <header
         style={{ minHeight: "4rem" }}
-        className="w-full h-16 flex justify-between items-center px-8 border-b-2 border-zinc-700"
+        className="w-full h-16 flex justify-between items-center px-8 border-b-2 border-zinc-200 dark:border-zinc-700"
       >
         <p>Rooms</p>
         <section className="flex gap-4">
           <button
             onClick={handleClick}
-            className="p-1 bg-zinc-700 box-content rounded-full transition-transform hover:scale-125"
+            className="p-1 bg-zinc-200 dark:bg-zinc-700 box-content rounded-full transition-transform hover:scale-125"
           >
             <MdAdd size={24} />
           </button>
@@ -57,7 +57,7 @@ export function Rooms({ props } = {}) {
               return (
                 <div
                   key={room}
-                  className="w-full py-4 px-8 border-2 bg-zinc-800 border-zinc-700 rounded-xl text-center "
+                  className="w-full py-4 px-8 border-2 bg-zinc-200 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 rounded-xl text-center "
                 >
                   {room}
                 </div>
@@ -70,7 +70,7 @@ export function Rooms({ props } = {}) {
                     navigateRoom(room);
                     toggleDrawer && toggleDrawer();
                   }}
-                  className="w-full py-4 px-8 border-2 border-zinc-800 rounded-xl transition-colors hover:bg-zinc-800"
+                  className="w-full py-4 px-8 border-2 border-zinc-200 dark:border-zinc-800 rounded-xl transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
                 >
                   {room}
                 </button>

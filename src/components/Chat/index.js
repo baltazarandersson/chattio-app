@@ -47,11 +47,11 @@ export function Chat() {
                     />
                     <div className="flex h-full flex-col justify-between">
                       <div className="flex gap-4 items-center">
-                        <p className="text-zinc-400">
+                        <p className="text-zinc-500 dark:text-zinc-400">
                           {messageUser.displayName}
                         </p>
-                        <div className="hidden md:block w-2 h-2 bg-zinc-500 rounded-full scale-90" />
-                        <p className="text-zinc-500 text-sm">
+                        <div className="hidden md:block w-2 h-2 bg-zinc-400 dark:bg-zinc-500 rounded-full scale-90" />
+                        <p className="text-zinc-400 dark:text-zinc-500 text-sm">
                           {new Date(message.unixDate).toLocaleString("en-US", {
                             day: "numeric",
                             month: "numeric",

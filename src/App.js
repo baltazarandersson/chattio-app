@@ -3,6 +3,7 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 
 function App() {
+  document.documentElement.classList.remove("dark");
   return (
     <div className="App h-screen font-poppins">
       <Routes>
