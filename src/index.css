@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply text-zinc-800 dark:text-zinc-50;
+  @apply font-medium text-zinc-800 dark:text-zinc-50;
 }
 
 body {

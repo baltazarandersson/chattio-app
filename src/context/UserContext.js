@@ -23,6 +23,11 @@ export function UserContextProvider({ children }) {
   const [rooms, setRooms] = useState(null);
   const [currentRoomData, setCurrentRoomData] = useState({});
   const [currentParticipants, setCurrentParticipants] = useState([]);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === null
+      ? true
+      : JSON.parse(localStorage.getItem("darkMode"))
+  );
   let navigate = useNavigate();
 
   async function changeRoom(room) {
@@ -69,6 +74,20 @@ export function UserContextProvider({ children }) {
       return unsub;
     }
   }, [currentRoom]);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("darkMode", true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("darkMode", false);
+    }
+  }, [darkMode]);
+
+  function toggleDark() {
+    setDarkMode((prevState) => !prevState);
+  }
 
   async function getParticipants() {
     const listOfUsers = await getDocs(collection(db, "users"));
@@ -122,7 +141,7 @@ export function UserContextProvider({ children }) {
   function handleLogOut() {
     signOut(auth)
       .then(() => {
-        localStorage.clear();
+        localStorage.removeItem("Auth Token");
         navigate("/");
       })
       .catch((error) => {
@@ -144,6 +163,8 @@ export function UserContextProvider({ children }) {
         currentParticipants,
         navigateRoom,
         handleLogOut,
+        toggleDark,
+        darkMode,
       }}
     >
       {children}

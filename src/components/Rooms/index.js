@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { MdAdd, MdClose } from "react-icons/md";
+import {
+  MdAdd,
+  MdClose,
+  MdOutlineWbSunny,
+  MdOutlineNightsStay,
+} from "react-icons/md";
 import { useUserContext } from "../../context/UserContext";
 import { useLoader } from "../../hooks/useLoader";
 import { Loader } from "../Loader";
@@ -11,7 +16,8 @@ export function Rooms({ props } = {}) {
   const isLoading = useLoader();
   const { toggleDrawer } = props ? props : {};
 
-  const { rooms, currentRoom, navigateRoom } = useUserContext();
+  const { rooms, currentRoom, navigateRoom, toggleDark, darkMode } =
+    useUserContext();
 
   function toggleModal() {
     setShowModal(false);
@@ -28,6 +34,16 @@ export function Rooms({ props } = {}) {
       >
         <p>Rooms</p>
         <section className="flex gap-4">
+          <button
+            onClick={toggleDark}
+            className="w-6 flex items-center justify-center p-1 bg-zinc-200 dark:bg-zinc-700 box-content rounded-full duration-300 transition-transform hover:scale-125"
+          >
+            {darkMode ? (
+              <MdOutlineNightsStay size={20} />
+            ) : (
+              <MdOutlineWbSunny size={20} />
+            )}
+          </button>
           <button
             onClick={handleClick}
             className="p-1 bg-zinc-200 dark:bg-zinc-700 box-content rounded-full transition-transform hover:scale-125"
@@ -70,7 +86,7 @@ export function Rooms({ props } = {}) {
                     navigateRoom(room);
                     toggleDrawer && toggleDrawer();
                   }}
-                  className="w-full py-4 px-8 border-2 border-zinc-200 dark:border-zinc-800 rounded-xl transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
+                  className="w-full py-4 px-8 border-2 border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-800"
                 >
                   {room}
                 </button>

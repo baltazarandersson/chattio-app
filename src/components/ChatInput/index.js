@@ -31,7 +31,7 @@ export function ChatInput() {
       <input
         ref={inputRef}
         onChange={handleChange}
-        className="grow bg-zinc-300 dark:bg-zinc-700 box-border px-8 outline-none transition-colors dark:hover:bg-zinc-600 rounded-xl"
+        className="grow bg-zinc-300 dark:bg-zinc-700 box-border px-8 outline-none dark:hover:bg-zinc-600 rounded-xl"
       />
       <button
         onClick={handleSumbit}

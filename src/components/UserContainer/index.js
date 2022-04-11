@@ -25,7 +25,7 @@ export function UserContainer({ props }) {
   return (
     <div
       style={{ minHeight: "5rem" }}
-      className="w-full flex px-8 py-4 border-t-2 border-zinc-200 dark:border-zinc-700 transition-all duration-300 h-20"
+      className="w-full flex px-8 py-4 border-t-2 border-zinc-200 dark:border-zinc-700 h-20"
     >
       <div className="h-12 w-full flex justify-between gap-4 items-center">
         <img
@@ -42,11 +42,11 @@ export function UserContainer({ props }) {
         <div className="relative right-0 bg-zinc-50 dark:bg-zinc-900">
           <button
             onClick={handleLogOut}
-            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-200 dark:bg-zinc-800 -translate-x-2/4 rounded-xl transition-all hover:bg-zinc-300 dark:hover:bg-zinc-700 ${
+            className={`absolute bottom-12 left-1/2 p-2 px-4 bg-zinc-200 dark:bg-zinc-800 -translate-x-2/4 rounded-xl transition-opacity hover:bg-zinc-300 dark:hover:bg-zinc-700 ${
               isOpened ? "opacity-100" : "invisible opacity-0"
             }`}
           >
-            LogOut
+            <p className="font-medium">LogOut</p>
           </button>
           <button
             onClick={() => {
