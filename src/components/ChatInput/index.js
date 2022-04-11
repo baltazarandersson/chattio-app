@@ -31,12 +31,12 @@ export function ChatInput() {
       <input
         ref={inputRef}
         onChange={handleChange}
-        className="grow bg-zinc-300 dark:bg-zinc-700 box-border px-8 outline-none dark:hover:bg-zinc-600 rounded-xl"
+        className="w-full sm:grow bg-zinc-300 dark:bg-zinc-700 box-border px-8 outline-none dark:hover:bg-zinc-600 rounded-xl"
       />
       <button
         onClick={handleSumbit}
         type="button"
-        className="w-2/12 flex justify-center items-center bg-sky-500 rounded-xl transition-transform hover:scale-110"
+        className="w-1/4 sm:w-2/12 flex justify-center items-center bg-sky-500 rounded-xl transition-transform hover:scale-110"
       >
         <IoSend size={26} className="text-zinc-50" />
       </button>
