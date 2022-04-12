@@ -1,8 +1,9 @@
 import { useUserContext } from "../../context/UserContext";
 import { useLoader } from "../../hooks/useLoader";
 import { Loader } from "../Loader";
+import React from "react";
 
-export function Chat() {
+export function Chat({ chatRef }) {
   const { currentRoomData, currentParticipants } = useUserContext();
   const isLoading = useLoader();
   const roomMessages = currentRoomData.messages || [];
@@ -18,7 +19,10 @@ export function Chat() {
   return (
     <>
       {
-        <div className="w-full h-full flex flex-col-reverse gap-6 pt-6 overflow-auto">
+        <div
+          ref={chatRef}
+          className="w-full h-full flex flex-col-reverse gap-6 pt-6 overflow-auto"
+        >
           {roomMessages.length > 0 &&
             roomMessages
               .slice(0)

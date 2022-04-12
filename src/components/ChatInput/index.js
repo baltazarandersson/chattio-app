@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useUserContext } from "../../context/UserContext";
 import { useLoader } from "../../hooks/useLoader";
 
-export function ChatInput() {
+export function ChatInput({ chatRef }) {
   const [keyword, setKeyword] = useState("");
   const { sendMessage } = useUserContext();
   const isLoading = useLoader();
-
-  const inputRef = React.createRef();
+  const inputRef = useRef();
 
   function handleChange(e) {
     setKeyword(e.target.value);
@@ -16,8 +15,14 @@ export function ChatInput() {
 
   function handleSumbit(e) {
     e.preventDefault();
-    sendMessage(keyword);
     inputRef.current.value = "";
+    setKeyword("");
+    if (keyword !== "") {
+      sendMessage(keyword);
+    }
+    setTimeout(() => {
+      chatRef.current.scroll({ top: 100, behavior: "smooth" });
+    }, 100);
   }
   if (isLoading) {
     return <div></div>;
