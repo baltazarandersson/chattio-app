@@ -5,7 +5,9 @@ export function useRedirect() {
   let navigate = useNavigate();
   useEffect(() => {
     const authToken = localStorage.getItem("Auth Token");
-    if (!authToken) {
+    if (authToken) {
+      navigate("/room/home");
+    } else {
       navigate("/");
     }
   }, []);
